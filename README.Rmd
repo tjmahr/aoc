@@ -1,0 +1,198 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+file.remove(list.files("R", pattern = "day.*", full.names = TRUE))
+file.remove(list.files("inst", pattern = "input.*", full.names = TRUE))
+file.remove(list.files("inst", pattern = "run.*", full.names = TRUE))
+file.remove(list.files("tests/testthat", pattern = "test.day*", full.names = TRUE))
+file.remove("R/data-solutions.R")
+file.rename(".aoccookie", ".xaoccookie")
+aoc::use_day(01, 2020, open = FALSE)
+```
+
+# aoc
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+aoc provides [usethis](https://usethis.r-lib.org/)-style functions for Advent of
+Code puzzles. This package only downloads content from the Advent of Code
+site. 
+
+## Installation
+
+You can install the development version of aoc from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("tjmahr/aoc")
+```
+
+## Functionality
+
+aoc assumes that you are working inside an R package. By default, it assumes the
+package is named `adventofcodeXX` where XX are the last two digits of the year.
+For example, `adventofcode20` would be the package for 2020.
+
+From this setup, aoc will automate a number of tasks. `use_day()` is a
+[usethis](https://usethis.r-lib.org/)-style function to create placeholder files
+for each day.
+
+`use_day(day = 1)` does the following tasks:
+
+  - on first run, creates `R/data-solutions.R`
+    - a file for storing solutions
+    
+  - creates `R/day01.R`
+    - puts the puzzle description into a roxygen documentation block
+    - creates placeholder functions for the solutions to day 1
+    
+  - creates `tests/testthat/test-day01.R`
+    - a unit test for day (useful for the example in the puzzle
+      description) in `tests/testthat/test-day01.R`
+      
+  - creates `inst/input01.txt`
+    - a file to hold the input for day 1
+    
+  - creates `inst/run-day01.R` 
+    - a file to contain the solution for day 1
+
+```{r, eval = FALSE}
+aoc::use_day(1, year = 2020)
+#> √ Writing 'R/data-solutions.R'
+#> * Modify 'R/data-solutions.R'
+#> Executing: pandoc -t markdown -o 
+#> "C:\Users\trist\AppData\Local\Temp\RtmpiYf4Vi\file42a83cf05e25.markdown" 
+#> ">C:\Users\trist\AppData\Local\Temp\RtmpiYf4Vi\file42a83cf05e25.html"
+#> √ Writing 'R/day01.R'
+#> * Modify 'R/day01.R'
+#> ● Write your solution code here
+#> ● Once you unlock Part Two, update the Roxygen block with the description
+#> √ Writing 'inst/input01.txt'
+#> * Modify 'inst/input01.txt'
+#> ● Copy your problem input into this file
+#> √ Writing 'tests/testthat/test-day01.R'
+#> * Modify 'tests/testthat/test-day01.R'
+#> ● Write unit tests using the examples from the problem description
+#> √ Writing 'inst/run-day01.R'
+#> * Modify 'inst/run-day01.R'
+#> ● Run your solution on the input here. Once it works, update R/data-solutions.R
+```
+
+`R/data-solutions.R` is where we store our solutions:
+
+```{r, echo = FALSE, comment = ""}
+writeLines(brio::read_lines("R/data-solutions.R"))
+```
+
+`inst/input01.txt` is an empty file for our input data. We have to paste in our
+puzzle input here.
+
+The R script for `R/day01.R` provides the puzzle description for part 1,
+function stubs for part 1 `f01a()` and part 2 `f01b()`. I also like to make the
+example data into a function for unit tests or code examples, so there is a stub
+for `example_data_01()`.
+
+```{r, echo = FALSE, comment = ""}
+writeLines(brio::read_lines("R/day01.R"))
+```
+
+`tests/testthat/test-day01.R` is a placeholder for file unit tests. It's a good
+place work through the examples in the puzzle description.
+
+```{r, echo = FALSE, comment = ""}
+writeLines(brio::read_lines("tests/testthat/test-day01.R"))
+```
+
+Once we have developed a solution for the example input, we can test our
+official input by running the code in `inst/run-day01.R`. The final two lines
+provide code to validate the solutions that we store in `R/data-solutions.R`.
+
+```{r, echo = FALSE, comment = ""}
+writeLines(brio::read_lines("inst/run-day01.R"))
+```
+
+
+
+### Default values for `use_day()`
+
+We can tell aoc which year to use by using `options()`.
+
+```{r, eval = TRUE}
+options(aoc.year = 2017)
+aoc::use_day(3)
+```
+
+If we look at the first lines of `R/day03.R`, we can see the correct URL used.
+
+```{r, echo = FALSE, comment = ""}
+writeLines(c(head(brio::read_lines("R/day03.R")), "[... truncated ...]"))
+```
+
+We can also tell aoc which package name to use for our project using
+`options()`.
+
+```{r, eval = TRUE}
+options(aoc.package = "awesomeadvent2017")
+aoc::use_day(4)
+```
+
+And here the correct name appears in the `library()` call.
+
+```{r, echo = FALSE, comment = ""}
+writeLines(c(head(brio::read_lines("inst/run-day04.R")), "[... truncated ...]"))
+```
+
+We can set these permanently for an Advent of Code package by editing the
+package's `.Rprofile`:
+
+```{r, eval = FALSE}
+usethis::edit_r_profile(scope = "project")
+# add in things like `options(aoc.year = 2017)`
+```
+
+### Advanced: Using a user cookie 
+
+If you know how to retrieve the cookie for your Advent of Code user, you can use
+this cookie to download your puzzle input. Store the cookie in file named
+`.aoccookie`. Then `use_day()` will automatically use this cookie when
+downloading puzzle input.
+
+For these demos, I hid my cookie by renaming the file. If I unrename the file
+and download the day 7 files, I can preview the lines of the input file.
+
+```{r}
+file.rename(".xaoccookie", ".aoccookie")
+
+aoc::use_day(7)
+
+writeLines(head(readLines("inst/input07.txt")))
+```
+
+The other advantage of a user cookie is that after solving part 1 of a day, we
+can download part 2 as a roxygen2 block. By default, this block is copied to the 
+clipboard, but for this demo, I have to disable it.
+
+```{r, comment = ""}
+aoc::download_part2_to_roxygen_md(day = 7, clip = FALSE)
+```
+
+
+```{r, include = FALSE}
+file.remove(list.files("R", pattern = "day.*", full.names = TRUE))
+file.remove(list.files("inst", pattern = "input.*", full.names = TRUE))
+file.remove(list.files("inst", pattern = "run.*", full.names = TRUE))
+file.remove(list.files("tests/testthat", pattern = "test.day*", full.names = TRUE))
+file.remove("R/data-solutions.R")
+```
+
