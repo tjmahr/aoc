@@ -7,8 +7,8 @@
 <!-- badges: end -->
 
 aoc provides [usethis](https://usethis.r-lib.org/)-style functions for
-Advent of Code puzzles. This package only downloads content from the
-Advent of Code site.
+[Advent of Code](https://adventofcode.com) puzzles. This package only
+downloads content from the Advent of Code site.
 
 ## Installation
 
@@ -254,7 +254,7 @@ We can tell aoc which year to use by using `options()`.
 ``` r
 options(aoc.year = 2017)
 aoc::use_day(3)
-#> Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpkrZDJG\file3e7c34be1f2f.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpkrZDJG\file3e7c34be1f2f.html"
+#> Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c020e43479.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c020e43479.html"
 #> v Writing 'R/day03.R'
 #> <U+25CF> Write your solution code here
 #> <U+25CF> Once you unlock Part Two, update the Roxygen block with the description
@@ -284,7 +284,7 @@ We can also tell aoc which package name to use for our project using
 ``` r
 options(aoc.package = "awesomeadvent2017")
 aoc::use_day(4)
-#> Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpkrZDJG\file3e7c3f875db2.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpkrZDJG\file3e7c3f875db2.html"
+#> Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c073b72438.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c073b72438.html"
 #> v Writing 'R/day04.R'
 #> <U+25CF> Write your solution code here
 #> <U+25CF> Once you unlock Part Two, update the Roxygen block with the description
@@ -332,7 +332,7 @@ file.rename(".xaoccookie", ".aoccookie")
 
 aoc::use_day(7)
 #> downloading puzzle html using .aoccookie
-#> Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpkrZDJG\file3e7c30461d57.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpkrZDJG\file3e7c30461d57.html"
+#> Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c03e086b72.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c03e086b72.html"
 #> v Writing 'R/day07.R'
 #> <U+25CF> Write your solution code here
 #> <U+25CF> Once you unlock Part Two, update the Roxygen block with the description
@@ -361,7 +361,7 @@ is copied to the clipboard, but for this demo, I have to disable it.
 ``` r
 aoc::download_part2_to_roxygen_md(day = 7, clip = FALSE)
 downloading puzzle html using .aoccookie
-Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpkrZDJG\file3e7c7ec6ab0.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpkrZDJG\file3e7c7ec6ab0.html"
+Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c01a3b3e23.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c01a3b3e23.html"
 #' **Part Two**
 #' The programs explain the situation: they can\'t get down. Rather, they
 #' *could* get down, if they weren\'t expending all of their energy trying

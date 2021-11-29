@@ -25,9 +25,9 @@ aoc::use_day(01, 2020, open = FALSE)
 <!-- badges: start -->
 <!-- badges: end -->
 
-aoc provides [usethis](https://usethis.r-lib.org/)-style functions for Advent of
-Code puzzles. This package only downloads content from the Advent of Code
-site. 
+aoc provides [usethis](https://usethis.r-lib.org/)-style functions for [Advent
+of Code](https://adventofcode.com) puzzles. This package only downloads content
+from the Advent of Code site.
 
 ## Installation
 
