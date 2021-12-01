@@ -114,6 +114,7 @@ use_day <- function(day, year = NULL, open = interactive(), cookie = NULL, packa
     "Once you unlock Part Two, update the Roxygen block with the description"
   )
 
+  usethis::use_directory("inst")
   input_data <- get_aoc_input(day, year, cookie)
   usethis::use_template(
     "input.txt",
