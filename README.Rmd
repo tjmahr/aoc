@@ -35,8 +35,18 @@ You can install the development version of aoc from [GitHub](https://github.com/
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("tjmahr/aoc")
+remotes::install_github("tjmahr/aoc")
 ```
+
+## Preliminaries
+
+aoc assumes that we are organizing our R code using an R package. Therefore, it
+requires a minimal package infrastructure in order to work. In RStudio, using
+
+  - File \> New Project... \> New Directory \> R Package
+  - Setting the package name to `adventofcode21` \> Create Project
+
+should create enough of an R package setup for aoc to work.
 
 ## Functionality
 
@@ -91,8 +101,22 @@ aoc::use_day(1, year = 2020)
 
 `R/data-solutions.R` is where we store our solutions:
 
+```{r, echo = FALSE}
+preview_lines <- function(path, lines = 10) {
+  # path <- "R/utils-usethis.R"
+  l <- readLines(path)
+  if (lines * 2 < length(l)) {
+    show <- c(head(l, lines), "[... truncated ...]")
+  } else {
+    show <- l
+  }
+  writeLines(show)
+}
+```
+
+
 ```{r, echo = FALSE, comment = ""}
-writeLines(brio::read_lines("R/data-solutions.R"))
+preview_lines("R/data-solutions.R", 20)
 ```
 
 `inst/input01.txt` is an empty file for our input data. We have to paste in our
@@ -104,14 +128,14 @@ example data into a function for unit tests or code examples, so there is a stub
 for `example_data_01()`.
 
 ```{r, echo = FALSE, comment = ""}
-writeLines(brio::read_lines("R/day01.R"))
+preview_lines("R/day01.R", 200)
 ```
 
 `tests/testthat/test-day01.R` is a placeholder for file unit tests. It's a good
 place work through the examples in the puzzle description.
 
 ```{r, echo = FALSE, comment = ""}
-writeLines(brio::read_lines("tests/testthat/test-day01.R"))
+preview_lines("tests/testthat/test-day01.R")
 ```
 
 Once we have developed a solution for the example input, we can test our
@@ -119,7 +143,7 @@ official input by running the code in `inst/run-day01.R`. The final two lines
 provide code to validate the solutions that we store in `R/data-solutions.R`.
 
 ```{r, echo = FALSE, comment = ""}
-writeLines(brio::read_lines("inst/run-day01.R"))
+preview_lines("inst/run-day01.R")
 ```
 
 
@@ -136,7 +160,7 @@ aoc::use_day(3)
 If we look at the first lines of `R/day03.R`, we can see the correct URL used.
 
 ```{r, echo = FALSE, comment = ""}
-writeLines(c(head(brio::read_lines("R/day03.R")), "[... truncated ...]"))
+preview_lines("R/day03.R")
 ```
 
 We can also tell aoc which package name to use for our project using
@@ -150,7 +174,7 @@ aoc::use_day(4)
 And here the correct name appears in the `library()` call.
 
 ```{r, echo = FALSE, comment = ""}
-writeLines(c(head(brio::read_lines("inst/run-day04.R")), "[... truncated ...]"))
+preview_lines("inst/run-day04.R")
 ```
 
 We can set these permanently for an Advent of Code package by editing the
@@ -176,7 +200,8 @@ file.rename(".xaoccookie", ".aoccookie")
 
 aoc::use_day(7)
 
-writeLines(head(readLines("inst/input07.txt")))
+# this is a function i defined in a hidden code block 🤫
+preview_lines("inst/input07.txt")
 ```
 
 The other advantage of a user cookie is that after solving part 1 of a day, we

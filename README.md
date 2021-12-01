@@ -17,8 +17,19 @@ You can install the development version of aoc from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("tjmahr/aoc")
+remotes::install_github("tjmahr/aoc")
 ```
+
+## Preliminaries
+
+aoc assumes that we are organizing our R code using an R package.
+Therefore, it requires a minimal package infrastructure in order to
+work. In RStudio, using
+
+-   File > New Project… > New Directory > R Package
+-   Setting the package name to `adventofcode21` > Create Project
+
+should create enough of an R package setup for aoc to work.
 
 ## Functionality
 
@@ -90,40 +101,7 @@ aoc::use_day(1, year = 2020)
       day08a = NA,
       day08b = NA,
       day09a = NA,
-      day09b = NA,
-      day10a = NA,
-      day10b = NA,
-      day11a = NA,
-      day11b = NA,
-      day12a = NA,
-      day12b = NA,
-      day13a = NA,
-      day13b = NA,
-      day14a = NA,
-      day14b = NA,
-      day15a = NA,
-      day15b = NA,
-      day16a = NA,
-      day16b = NA,
-      day17a = NA,
-      day17b = NA,
-      day18a = NA,
-      day18b = NA,
-      day19a = NA,
-      day19b = NA,
-      day20a = NA,
-      day20b = NA,
-      day21a = NA,
-      day21b = NA,
-      day22a = NA,
-      day22b = NA,
-      day23a = NA,
-      day23b = NA,
-      day24a = NA,
-      day24b = NA,
-      day25a = NA,
-      day25b = NA
-    )
+    [... truncated ...]
 
 `inst/input01.txt` is an empty file for our input data. We have to paste
 in our puzzle input here.
@@ -254,7 +232,7 @@ We can tell aoc which year to use by using `options()`.
 ``` r
 options(aoc.year = 2017)
 aoc::use_day(3)
-#> Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c020e43479.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c020e43479.html"
+#> Executing: pandoc -t markdown -o "C:\Users\Tristan\AppData\Local\Temp\Rtmpg584jz\file40742a5c613a.markdown" "C:\Users\Tristan\AppData\Local\Temp\Rtmpg584jz\file40742a5c613a.html"
 #> v Writing 'R/day03.R'
 #> <U+25CF> Write your solution code here
 #> <U+25CF> Once you unlock Part Two, update the Roxygen block with the description
@@ -276,6 +254,10 @@ used.
     #'
     #' @name day03
     #' @rdname day03
+    #' @details
+    #'
+    #' **Part One**
+    #'
     [... truncated ...]
 
 We can also tell aoc which package name to use for our project using
@@ -284,7 +266,7 @@ We can also tell aoc which package name to use for our project using
 ``` r
 options(aoc.package = "awesomeadvent2017")
 aoc::use_day(4)
-#> Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c073b72438.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c073b72438.html"
+#> Executing: pandoc -t markdown -o "C:\Users\Tristan\AppData\Local\Temp\Rtmpg584jz\file4074505f5e2e.markdown" "C:\Users\Tristan\AppData\Local\Temp\Rtmpg584jz\file4074505f5e2e.html"
 #> v Writing 'R/day04.R'
 #> <U+25CF> Write your solution code here
 #> <U+25CF> Once you unlock Part Two, update the Roxygen block with the description
@@ -305,7 +287,8 @@ And here the correct name appears in the `library()` call.
     p1 <- f04a(x)
     p2 <- f04b(x)
 
-    [... truncated ...]
+    stopifnot(p1 == aoc_solutions$day04a)
+    stopifnot(p2 == aoc_solutions$day04b)
 
 We can set these permanently for an Advent of Code package by editing
 the package’s `.Rprofile`:
@@ -332,7 +315,7 @@ file.rename(".xaoccookie", ".aoccookie")
 
 aoc::use_day(7)
 #> downloading puzzle html using .aoccookie
-#> Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c03e086b72.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c03e086b72.html"
+#> Executing: pandoc -t markdown -o "C:\Users\Tristan\AppData\Local\Temp\Rtmpg584jz\file4074341e7624.markdown" "C:\Users\Tristan\AppData\Local\Temp\Rtmpg584jz\file4074341e7624.html"
 #> v Writing 'R/day07.R'
 #> <U+25CF> Write your solution code here
 #> <U+25CF> Once you unlock Part Two, update the Roxygen block with the description
@@ -345,13 +328,19 @@ aoc::use_day(7)
 #> v Writing 'inst/run-day07.R'
 #> <U+25CF> Run your solution on the input here. Once it works, update R/data-solutions.R
 
-writeLines(head(readLines("inst/input07.txt")))
+# this is a function i defined in a hidden code block 🤫
+preview_lines("inst/input07.txt")
 #> uglvj (99) -> ymfjt, gkpgf
 #> vvwrg (51)
 #> qrpgt (5)
 #> qhqbqj (55)
 #> taxdaf (23)
 #> zbbdyc (81)
+#> xhymdo (185) -> errip, lsppdni, mxukll
+#> qlrcubm (81)
+#> ukgzz (7)
+#> ubvvr (288) -> hrpzu, msjeeks, ozizlok
+#> [... truncated ...]
 ```
 
 The other advantage of a user cookie is that after solving part 1 of a
@@ -361,7 +350,7 @@ is copied to the clipboard, but for this demo, I have to disable it.
 ``` r
 aoc::download_part2_to_roxygen_md(day = 7, clip = FALSE)
 downloading puzzle html using .aoccookie
-Executing: pandoc -t markdown -o "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c01a3b3e23.markdown" "C:\Users\trist\AppData\Local\Temp\RtmpqWcDtg\file37c01a3b3e23.html"
+Executing: pandoc -t markdown -o "C:\Users\Tristan\AppData\Local\Temp\Rtmpg584jz\file40743a65678c.markdown" "C:\Users\Tristan\AppData\Local\Temp\Rtmpg584jz\file40743a65678c.html"
 #' **Part Two**
 #' The programs explain the situation: they can\'t get down. Rather, they
 #' *could* get down, if they weren\'t expending all of their energy trying
